@@ -1,2 +1,2 @@
 # DiscordSay
-## 简单的Discord水群机器人
+## Discord机器人
