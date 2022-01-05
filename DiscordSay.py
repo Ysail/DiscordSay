@@ -2,6 +2,7 @@ import json
 import requests
 import random
 import time
+from discord_webhook import DiscordWebhook#pip install discord_webhook
 
 #v2rayN本地代理
 #因为需要访问外网
@@ -13,8 +14,8 @@ proxy = {'http': 'http://127.0.0.1:10809',
 
 #配置信息 替换""内信息
 token="###"
-serverid = "911794555089739827"#服务器ID
-channelid = "911797981781561414"#频道ID
+serverid = "###"#服务器ID
+channelid = "###"#频道ID
 
 
 #语言库 可自行添加
@@ -188,15 +189,18 @@ myfriend = json.loads(mss)
 def abc():
     a = ""
     while True:
-        print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-        mssage = myfriend["bot"][random.randint(0,len(myfriend["bot"])-1)]["message"]#随机话术
-        if a != mssage:
-            mss_data = {"content": mssage,
-                        "tts": "false",}
-            r=requests.post(url=url,headers=header_data,data=mss_data,proxies=proxy)#如果不使用本地代理请删除 ,proxies=proxy
-            if 199 < r.status_code < 300:
-              print("发送成功~~~~" + str(mssage))
-            a=mssage
-            time.sleep(10)#暂停时间
+        try:
+          print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+          mssage = myfriend["bot"][random.randint(0,len(myfriend["bot"])-1)]["message"]#随机话术
+          if a != mssage:
+              mss_data = {"content": mssage,
+                          "tts": "false",}
+              r=requests.post(url=url,headers=header_data,data=mss_data,proxies=proxy)#如果不使用本地代理请删除 ,proxies=proxy
+              if 199 < r.status_code < 300:
+                print("发送成功~~~~" + str(mssage))
+              a=mssage
+              time.sleep(10)#设置延迟时间
+        except Exception as ex:
+            print(str(ex))
 if __name__ == "__main__":
     abc()
